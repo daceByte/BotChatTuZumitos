@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO Cliente</title>
+  </head>
+  <body>
+    <h1>Prueba</h1>
+    <button onclick="start(0)">iniciar</button>
+    <button onclick="stop(0)">Cerrar</button>
+    <p id="response"></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+      const socket = io("http://localhost:3003/");
+
+      // Escucha eventos desde el servidor remoto
+      socket.on("msg", (data) => {
+        console.log(data);
+      });
+
+      socket.on("info", (data) => {
+        console.log(data);
+      });
+
+      socket.on("chats", (data) => {
+        console.log(data);
+      });
+
+      // Emitir eventos al servidor remoto
+      function start(index) {
+        socket.emit("session", { session: index });
+      }
+
+      function stop(index) {
+        socket.emit("logout", { session: index });
+      }
+    </script>
+  </body>
+</html>
