@@ -1,0 +1,54 @@
+.simplebar-content {
+  background-color: #20361c !important;
+}
+.bg-orange {
+  background-color: #b98016 !important;
+}
+.bg-orange:hover {
+  background-color: #e7a11f !important;
+  color: #1e3b1e !important;
+}
+.css-5x17ey-MuiDivider-root {
+  border-color: #1e3b1e !important;
+}
+.MuiTableRow-hover {
+  background-color: #fff !important;
+}
+.MessageLeft80 {
+  padding-left: 20px !important;
+}
+.inputSend {
+  max-width: "73%";
+  height: 50;
+}
+@media (min-width: 960px) {
+  .MessageLeft80 {
+    padding-left: 80px !important;
+  }
+  .inputSend {
+    max-width: "73%";
+    height: 50;
+  }
+}
+
+.areaRead {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 90vh;
+  width: 50%;
+  margin-left: 10px;
+}
+
+.iconAreaRead {
+  display: none;
+}
+@media (max-width: 900px) {
+  .areaRead {
+    position: absolute;
+    width: 100%;
+    right: 0;
+  }
+  .iconAreaRead {
+    display: flex !important;
+  }
+}
