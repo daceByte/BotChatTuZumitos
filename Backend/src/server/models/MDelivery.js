@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 const db = require("../../utils/database.js");
+const MBranch = require("./MBranch.js");
 
-const MResponse = db.define(
+const MDelivery = db.define(
   "tbl_delivery",
   {
     del_id: {
@@ -15,6 +16,9 @@ const MResponse = db.define(
     del_phone: {
       type: Sequelize.STRING,
     },
+    del_status: {
+      type: Sequelize.TINYINT,
+    },
     fk_del_bra_id: {
       type: Sequelize.INTEGER,
     },
@@ -24,4 +28,6 @@ const MResponse = db.define(
   }
 );
 
-module.exports = MResponse;
+MDelivery.belongsTo(MBranch, { foreignKey: "fk_del_bra_id" });
+
+module.exports = MDelivery;

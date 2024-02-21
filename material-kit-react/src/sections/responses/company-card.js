@@ -13,10 +13,10 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import UpdateClientModal from "./modal-client";
+import UpdateModalResponse from "./modal-response";
 
 export const CompanyCard = (props) => {
-  const { company } = props;
+  const { response } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,11 +30,11 @@ export const CompanyCard = (props) => {
 
   return (
     <>
-      <UpdateClientModal
-        fetchClients={props.fetchClients}
+      <UpdateModalResponse
+        fetchResponses={props.fetchResponses}
         open={isModalOpen}
         onClose={handleCloseModal}
-        client={company}
+        response={response}
       />
       <Card
         sx={{
@@ -52,17 +52,12 @@ export const CompanyCard = (props) => {
             }}
           >
             <Avatar
-              src={
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
-              }
+              src={"https://cdn-icons-png.flaticon.com/512/5824/5824260.png"}
               variant="square"
             />
           </Box>
           <Typography align="center" gutterBottom variant="h5">
-            {company.cli_fullname}
-          </Typography>
-          <Typography align="center" variant="body1">
-            {company.cli_phone}
+            {response.res_title}
           </Typography>
         </CardContent>
         <Box sx={{ flexGrow: 1 }} />
@@ -84,15 +79,11 @@ export const CompanyCard = (props) => {
               <ArrowDownOnSquareIcon />
             </SvgIcon>
             <Typography color="text.secondary" display="inline" variant="body2">
-              {company.cli_id} ID
+              {response.res_id} ID
             </Typography>
           </Stack>
         </Stack>
       </Card>
     </>
   );
-};
-
-CompanyCard.propTypes = {
-  company: PropTypes.object.isRequired,
 };

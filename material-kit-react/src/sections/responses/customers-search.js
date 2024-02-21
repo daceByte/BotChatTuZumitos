@@ -4,10 +4,10 @@ import { Card, InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
 export const CompaniesSearch = (props) => (
   <Card sx={{ p: 2 }}>
     <OutlinedInput
-      value={props.searchTerm}
+      value={props.search}
       onChange={props.handleInputChange}
       fullWidth
-      placeholder="Buscar cliente Numero/Nombre"
+      placeholder="Buscar respuesta rapida"
       startAdornment={
         <InputAdornment position="start">
           <SvgIcon color="action" fontSize="small">
@@ -17,10 +17,5 @@ export const CompaniesSearch = (props) => (
       }
       sx={{ maxWidth: 500 }}
     />
-    <br></br>
-    <small style={{ color: "red" }}>
-      *Para crear un usuario debes hacerlo desde el panel del chat, selección el chat(usuario) para
-      convertir a cliente; o en su defecto, desde leads conviértelos en clientes con un clic.
-    </small>
   </Card>
 );

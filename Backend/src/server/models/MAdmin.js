@@ -1,24 +1,27 @@
 const Sequelize = require("sequelize");
 const db = require("../../utils/database.js");
 
-const MResponse = db.define(
-  "tbl_response",
+const MAdmin = db.define(
+  "tbl_admin",
   {
-    res_id: {
+    adm_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    res_message: {
+    adm_pass: {
       type: Sequelize.STRING,
     },
-    res_title: {
-      type: Sequelize.STRING,
+    adm_last_login: {
+      type: Sequelize.DATE,
+    },
+    fk_adm_bra_id: {
+      type: Sequelize.INTEGER,
     },
   },
   {
-    tableName: "tbl_response",
+    tableName: "tbl_admin",
   }
 );
 
-module.exports = MResponse;
+module.exports = MAdmin;

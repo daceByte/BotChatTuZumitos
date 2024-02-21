@@ -18,6 +18,9 @@ const MLocation = db.define(
     loc_link: {
       type: Sequelize.STRING,
     },
+    loc_default: {
+      type: Sequelize.TINYINT,
+    },
     fk_loc_cli_id: {
       type: Sequelize.INTEGER,
     },

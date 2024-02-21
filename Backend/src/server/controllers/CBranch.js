@@ -1,6 +1,6 @@
 const MBranch = require("../models/MBranch.js");
 const logger = require("../../middleware/logger.js");
-const { apiProduct } = require("../../utils/constans.js");
+const { apiBranch } = require("../../utils/constans.js");
 const ctx = {
   ctx: apiBranch + "[CONTROLLER] [CBranch]",
 };
@@ -43,11 +43,11 @@ const CBranch = {
     }
   },
 
-  async update(id, data) {
+  async update(data) {
     try {
       await MBranch.update(data, {
         where: {
-          bra_id: id,
+          bra_id: data.id,
         },
       });
       return { success: true };

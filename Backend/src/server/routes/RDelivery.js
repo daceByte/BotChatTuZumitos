@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const logger = require("../../middleware/logger.js");
-const CClient = require("../controllers/CCLient.js");
+const CDelivery = require("../controllers/CDelivery.js");
 const { apiClient } = require("../../utils/constans.js");
 const router = Router();
 
@@ -16,7 +16,30 @@ router.get("/all/query/:page/:searchTerm/:phoneTherm", async (req, res) => {
     const searchTerm = req.params.searchTerm || "";
     const phoneTherm = req.params.phoneTherm || "";
 
-    const response = await CClient.allQuery(
+    const response = await CDelivery.allQuery(
+      page,
+      pageSize,
+      offset,
+      searchTerm,
+      phoneTherm
+    );
+    res.json(response);
+  } catch (error) {
+    console.log(error);
+    logger.child(ctx).error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/all/query/:page//", async (req, res) => {
+  try {
+    const pageSize = 10;
+    const page = req.params.page || 1;
+    const offset = (page - 1) * pageSize;
+    const searchTerm = req.params.searchTerm || "";
+    const phoneTherm = req.params.phoneTherm || "";
+
+    const response = await CDelivery.allQuery(
       page,
       pageSize,
       offset,
@@ -37,7 +60,7 @@ router.get("/all/query/:page", async (req, res) => {
     const page = req.params.page || 1;
     const offset = (page - 1) * pageSize;
 
-    const response = await CClient.allQuery(page, pageSize, offset, "", "");
+    const response = await CDelivery.allQuery(page, pageSize, offset, "", "");
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -48,7 +71,7 @@ router.get("/all/query/:page", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const response = await CClient.all();
+    const response = await CDelivery.all();
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -59,7 +82,7 @@ router.get("/all", async (req, res) => {
 
 router.get("/get/:id", async (req, res) => {
   try {
-    const response = await CClient.get(req.params.id);
+    const response = await CDelivery.get(req.params.id);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -70,7 +93,7 @@ router.get("/get/:id", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
-    const response = await CClient.create(req.body);
+    const response = await CDelivery.create(req.body);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -81,7 +104,7 @@ router.post("/create", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    const response = await CClient.update(req.body);
+    const response = await CDelivery.update(req.body);
     res.json(response);
   } catch (error) {
     console.log(error);

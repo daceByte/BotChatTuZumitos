@@ -141,7 +141,7 @@ export const SideNav = (props) => {
             target="_blank"
             variant="contained"
           >
-            ¿Como cerrar sesión?
+            Manual
           </Button>
         </Box>
       </Box>

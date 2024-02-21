@@ -1,54 +1,16 @@
 const { Router } = require("express");
 const logger = require("../../middleware/logger.js");
-const CClient = require("../controllers/CCLient.js");
+const CLocation = require("../controllers/CLocation.js");
 const { apiClient } = require("../../utils/constans.js");
 const router = Router();
 
 const ctx = {
-  ctx: apiClient + "[ROUTER] [RClient]",
+  ctx: apiClient + "[ROUTER] [RLocation]",
 };
 
-router.get("/all/query/:page/:searchTerm/:phoneTherm", async (req, res) => {
+router.get("/all/:id", async (req, res) => {
   try {
-    const pageSize = 10;
-    const page = req.params.page || 1;
-    const offset = (page - 1) * pageSize;
-    const searchTerm = req.params.searchTerm || "";
-    const phoneTherm = req.params.phoneTherm || "";
-
-    const response = await CClient.allQuery(
-      page,
-      pageSize,
-      offset,
-      searchTerm,
-      phoneTherm
-    );
-    res.json(response);
-  } catch (error) {
-    console.log(error);
-    logger.child(ctx).error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-router.get("/all/query/:page", async (req, res) => {
-  try {
-    const pageSize = 10;
-    const page = req.params.page || 1;
-    const offset = (page - 1) * pageSize;
-
-    const response = await CClient.allQuery(page, pageSize, offset, "", "");
-    res.json(response);
-  } catch (error) {
-    console.log(error);
-    logger.child(ctx).error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-router.get("/all", async (req, res) => {
-  try {
-    const response = await CClient.all();
+    const response = await CLocation.all(req.params.id);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -59,7 +21,18 @@ router.get("/all", async (req, res) => {
 
 router.get("/get/:id", async (req, res) => {
   try {
-    const response = await CClient.get(req.params.id);
+    const response = await CLocation.get(req.params.id);
+    res.json(response);
+  } catch (error) {
+    console.log(error);
+    logger.child(ctx).error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const response = await CLocation.delete(req.params.id);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -70,7 +43,7 @@ router.get("/get/:id", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
-    const response = await CClient.create(req.body);
+    const response = await CLocation.create(req.body);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -81,7 +54,7 @@ router.post("/create", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    const response = await CClient.update(req.body);
+    const response = await CLocation.update(req.body);
     res.json(response);
   } catch (error) {
     console.log(error);

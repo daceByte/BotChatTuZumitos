@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
@@ -15,101 +16,104 @@ import {
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { CompanyCard } from "src/sections/clients/company-card";
 import { CompaniesSearch } from "src/sections/clients/companies-search";
+import { getAllClients } from "src/api/apiClients";
 
-const companies = [
-  {
-    id: "2569ce0d517a7f06d3ea1f24",
-    createdAt: "27/03/2019",
-    description:
-      "Dropbox is a file hosting service that offers cloud storage, file synchronization, a personal cloud.",
-    logo: "/assets/logos/logo-dropbox.png",
-    title: "Dropbox",
-    downloads: "594",
-  },
-  {
-    id: "ed2b900870ceba72d203ec15",
-    createdAt: "31/03/2019",
-    description:
-      "Medium is an online publishing platform developed by Evan Williams, and launched in August 2012.",
-    logo: "/assets/logos/logo-medium.png",
-    title: "Medium Corporation",
-    downloads: "625",
-  },
-  {
-    id: "a033e38768c82fca90df3db7",
-    createdAt: "03/04/2019",
-    description:
-      "Slack is a cloud-based set of team collaboration tools and services, founded by Stewart Butterfield.",
-    logo: "/assets/logos/logo-slack.png",
-    title: "Slack",
-    downloads: "857",
-  },
-  {
-    id: "1efecb2bf6a51def9869ab0f",
-    createdAt: "04/04/2019",
-    description: "Lyft is an on-demand transportation company based in San Francisco, California.",
-    logo: "/assets/logos/logo-lyft.png",
-    title: "Lyft",
-    downloads: "406",
-  },
-  {
-    id: "1ed68149f65fbc6089b5fd07",
-    createdAt: "04/04/2019",
-    description: "GitHub is a web-based hosting service for version control of code using Git.",
-    logo: "/assets/logos/logo-github.png",
-    title: "GitHub",
-    downloads: "835",
-  },
-  {
-    id: "5dab321376eff6177407e887",
-    createdAt: "04/04/2019",
-    description:
-      "Squarespace provides software as a service for website building and hosting. Headquartered in NYC.",
-    logo: "/assets/logos/logo-squarespace.png",
-    title: "Squarespace",
-    downloads: "835",
-  },
-];
+const Page = () => {
+  const [clients, setClients] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 10;
 
-const Page = () => (
-  <>
-    <Head>
-      <title>Clientes</title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8,
-      }}
-    >
-      <Container maxWidth="xl">
-        <Stack spacing={3}>
-          <Stack direction="row" justifyContent="space-between" spacing={4}>
-            <Stack spacing={1}>
-              <Typography variant="h4">Clientes</Typography>
+  const [search, setSearch] = useState(".");
+
+  // Función para cargar la lista de clientes desde tu API
+  const fetchClients = async () => {
+    const response = await getAllClients(currentPage, search, search);
+    if (response.success) {
+      setClients(response.body.clients);
+      setTotalPages(response.body.totalPages);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  useEffect(() => {
+    fetchClients();
+  }, [currentPage, search]);
+
+  const handleInputChange = (event) => {
+    console.log(event);
+    setSearch(event.target.value);
+  };
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentClients = clients.slice(startIndex, endIndex);
+
+  return (
+    <>
+      <Head>
+        <title>Clientes</title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Stack spacing={3}>
+            <Stack direction="row" justifyContent="space-between" spacing={4}>
+              <Stack spacing={1}>
+                <Typography variant="h4">Clientes</Typography>
+              </Stack>
             </Stack>
+            <CompaniesSearch handleInputChange={handleInputChange} search={search} />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div>
+                <Button
+                  variant="contained"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Anterior
+                </Button>
+                <span
+                  style={{ marginLeft: 10, marginRight: 10 }}
+                >{`Página ${currentPage} de ${totalPages}`}</span>
+                <Button
+                  variant="contained"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Siguiente
+                </Button>
+              </div>
+            </div>
+            <Grid container spacing={3}>
+              {clients != null
+                ? clients.map((client) => (
+                    <Grid xs={12} md={6} lg={4} key={client.cli_id}>
+                      <CompanyCard fetchClients={fetchClients} company={client} />
+                    </Grid>
+                  ))
+                : null}
+            </Grid>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            ></Box>
           </Stack>
-          <CompaniesSearch />
-          <Grid container spacing={3}>
-            {companies.map((company) => (
-              <Grid xs={12} md={6} lg={4} key={company.id}>
-                <CompanyCard company={company} />
-              </Grid>
-            ))}
-          </Grid>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
-  </>
-);
+        </Container>
+      </Box>
+    </>
+  );
+};
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 

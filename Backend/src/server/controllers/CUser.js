@@ -1,15 +1,36 @@
 const MResponse = require("../models/MResponse.js");
 const logger = require("../../middleware/logger.js");
 const { apiResponse } = require("../../utils/constans.js");
+const { sign } = require("../../middleware/token.js");
+const MAdmin = require("../models/MAdmin.js");
 const ctx = {
   ctx: apiResponse + "[CONTROLLER] [CResponse]",
 };
 
 const CResponse = {
+  async login(data) {
+    try {
+      const adm = await MAdmin.findOne({
+        where: {
+          adm_user: data.user,
+          adm_pass: data.pass,
+        },
+      });
+
+      const token = await sign(adm.adm_id, adm.adm_last_login);
+
+      return { success: true, body: { user: adm, token } };
+    } catch (error) {
+      console.log(error);
+      logger.child(ctx).error(error);
+      return { success: false, error };
+    }
+  },
+
   async all() {
     try {
-      const responses = await MResponse.findAll();
-      return { success: true, body: responses };
+      const admins = await MAdmin.findAll();
+      return { success: true, body: admins };
     } catch (error) {
       console.log(error);
       logger.child(ctx).error(error);
@@ -19,12 +40,12 @@ const CResponse = {
 
   async get(id) {
     try {
-      const response = await MResponse.findOne({
+      const admin = await MAdmin.findOne({
         where: {
-          res_id: id,
+          adm_id: id,
         },
       });
-      return { success: true, body: response };
+      return { success: true, body: admin };
     } catch (error) {
       console.log(error);
       logger.child(ctx).error(error);
@@ -34,7 +55,7 @@ const CResponse = {
 
   async create(data) {
     try {
-      await MResponse.create(data);
+      await MAdmin.create(data);
       return { success: true };
     } catch (error) {
       console.log(error);
@@ -43,11 +64,11 @@ const CResponse = {
     }
   },
 
-  async update(data) {
+  async update(id, data) {
     try {
-      await MResponse.update(data, {
+      await MAdmin.update(data, {
         where: {
-          res_id: data.res_id,
+          adm_id: id,
         },
       });
       return { success: true };
@@ -60,9 +81,9 @@ const CResponse = {
 
   async delete(id) {
     try {
-      await MResponse.destroy({
+      await MAdmin.destroy({
         where: {
-          res_id: id,
+          adm_id: id,
         },
       });
       return { success: true };

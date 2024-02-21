@@ -1,0 +1,37 @@
+[14.02.2024 09:51:35 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:26 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:27 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:28 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:29 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:30 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:31 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:31 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:32 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - WHERE parameter "adm_user" has invalid "undefined" value
+[14.02.2024 09:55:56 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Invalid value { user: 'dace' }
+[14.02.2024 09:55:57 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Invalid value { user: 'dace' }
+[14.02.2024 11:28:32 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot access 'data' before initialization
+[14.02.2024 11:48:16 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[14.02.2024 12:58:31 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Op is not defined
+[14.02.2024 12:59:01 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Op is not defined
+[14.02.2024 12:59:01 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Op is not defined
+[14.02.2024 12:59:03 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Op is not defined
+[14.02.2024 12:59:27 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ILIKE '%2%' AND `tbl_client`.`cli_phone` ILIKE '%2%') LIMIT 0, 10' at line 1
+[14.02.2024 13:00:17 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - page is not defined
+[14.02.2024 14:19:32 pm] - [ERROR] [ROUTE] [/api/client] [ROUTER] [RClient] - Converting circular structure to JSON
+    --> starting at object with constructor 'Array'
+    |     index 0 -> object with constructor 'Object'
+    |     property 'parent' -> object with constructor 'Object'
+    --- property 'include' closes the circle
+[14.02.2024 16:15:43 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - Field 'fk_loc_cli_id' doesn't have a default value
+[14.02.2024 16:16:36 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - Field 'fk_loc_cli_id' doesn't have a default value
+[14.02.2024 16:17:10 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - this.build(...).save is not a function
+[14.02.2024 16:17:15 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - Field 'fk_loc_cli_id' doesn't have a default value
+[16.02.2024 16:12:37 pm] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[16.02.2024 16:32:43 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - Field 'loc_address' doesn't have a default value
+[16.02.2024 16:33:16 pm] - [ERROR] [ROUTE] [/api/location] [CONTROLLER] [CLocation] - Cannot read properties of null (reading 'loc_default')
+[16.02.2024 16:42:21 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - Op is not defined
+[16.02.2024 16:53:06 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
+[16.02.2024 16:53:07 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
+[16.02.2024 16:53:08 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
+[16.02.2024 16:53:42 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
+[16.02.2024 16:53:43 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined

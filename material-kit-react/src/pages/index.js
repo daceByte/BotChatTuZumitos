@@ -13,29 +13,34 @@ import { OverviewTraffic } from "src/sections/overview/overview-traffic";
 import { ReadQrCode } from "src/sections/chat/qr-code";
 import { ButtonSession } from "src/sections/chat/sesion-chat";
 import { ChatBox } from "src/sections/chat/chat-box";
+import { useState } from "react";
 
 const now = new Date();
 
-const Page = () => (
-  <>
-    <Head>
-      <title>Chat Empresarial</title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8,
-      }}
-    >
-      <Container maxWidth="xl">
-        <ButtonSession />
-        {/*<ReadQrCode/>*/}
-        <ChatBox />
-      </Container>
-    </Box>
-  </>
-);
+const Page = () => {
+  const [session, setSession] = useState(0);
+  const [active, setActive] = useState(false);
+
+  return (
+    <>
+      <Head>
+        <title>Chat Empresarial</title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth="xl">
+          <ButtonSession />
+          {session != 0 && active ? <ChatBox /> : <ReadQrCode />}
+        </Container>
+      </Box>
+    </>
+  );
+};
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 

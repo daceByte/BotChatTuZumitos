@@ -6,9 +6,13 @@ const ctx = {
 };
 
 const CLocation = {
-  async all() {
+  async all(id) {
     try {
-      const locations = await MLocation.findAll();
+      const locations = await MLocation.findAll({
+        where: {
+          fk_loc_cli_id: id,
+        },
+      });
       return { success: true, body: locations };
     } catch (error) {
       console.log(error);
@@ -34,6 +38,18 @@ const CLocation = {
 
   async create(data) {
     try {
+      if (data.loc_default == 1) {
+        await MLocation.update(
+          {
+            loc_default: 0,
+          },
+          {
+            where: {
+              fk_loc_cli_id: data.fk_loc_cli_id,
+            },
+          }
+        );
+      }
       await MLocation.create(data);
       return { success: true };
     } catch (error) {
@@ -43,14 +59,43 @@ const CLocation = {
     }
   },
 
-  async update(id, data) {
+  async update(data) {
     try {
-      await MLocation.update(data, {
-        where: {
-          loc_id: id,
-        },
-      });
-      return { success: true };
+      let passed = true;
+      if (data.loc_default == 1) {
+        await MLocation.update(
+          {
+            loc_default: 0,
+          },
+          {
+            where: {
+              fk_loc_cli_id: data.fk_loc_cli_id,
+            },
+          }
+        );
+      } else {
+        const location = await MLocation.findOne({
+          where: {
+            loc_id: data.loc_id,
+          },
+        });
+        if (location.loc_default == 1) {
+          passed = false;
+        }
+      }
+      if (passed) {
+        await MLocation.update(data, {
+          where: {
+            loc_id: data.loc_id,
+          },
+        });
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          body: "No puedes desactivar la ubicacion predeterminada.",
+        };
+      }
     } catch (error) {
       console.log(error);
       logger.child(ctx).error(error);
@@ -60,12 +105,25 @@ const CLocation = {
 
   async delete(id) {
     try {
-      await MLocation.destroy({
+      const location = await MLocation.findOne({
         where: {
           loc_id: id,
         },
       });
-      return { success: true };
+
+      if (location.loc_default == 0) {
+        await MLocation.destroy({
+          where: {
+            loc_id: id,
+          },
+        });
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          body: "No puedes eliminar la ubicacion predeterminada.",
+        };
+      }
     } catch (error) {
       console.log(error);
       logger.child(ctx).error(error);
