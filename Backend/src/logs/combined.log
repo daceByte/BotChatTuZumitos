@@ -1531,3 +1531,121 @@
 [20.02.2024 08:17:52 am] - [INFO] [SERVER] [DATABASE] - Database connected
 [20.02.2024 08:17:52 am] - [INFO] [SERVER] - Server running on localhost port :3003
 [20.02.2024 08:17:56 am] - [INFO] undefined - Token generated successfully
+[24.02.2024 14:29:28 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 14:31:28 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 14:31:28 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[24.02.2024 14:36:15 pm] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[24.02.2024 15:31:58 pm] - [INFO] undefined - Token generated successfully
+[24.02.2024 17:20:02 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 17:20:08 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[24.02.2024 17:20:30 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 17:20:31 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[24.02.2024 17:39:39 pm] - [INFO] undefined - Token generated successfully
+[24.02.2024 17:39:40 pm] - [INFO] undefined - Token generated successfully
+[24.02.2024 17:40:08 pm] - [INFO] undefined - Token generated successfully
+[24.02.2024 18:17:42 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 18:17:43 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[24.02.2024 18:27:19 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 18:27:20 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[24.02.2024 20:24:46 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[24.02.2024 20:24:49 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 08:33:36 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:39 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:41 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:45 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:34:18 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:34:25 am] - [INFO] undefined - Token generated successfully
+[25.02.2024 08:35:52 am] - [INFO] undefined - Token generated successfully
+[25.02.2024 12:51:38 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 12:52:04 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 13:03:34 pm] - [INFO] undefined - Token generated successfully
+[25.02.2024 13:03:34 pm] - [INFO] undefined - Token generated successfully
+[25.02.2024 14:00:33 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 14:00:33 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:06:02 pm] - [INFO] undefined - Token generated successfully
+[25.02.2024 15:20:57 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:20:58 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:23:07 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:23:08 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:24:05 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:24:06 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:25:27 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:25:27 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:28:38 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:28:38 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 15:42:56 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 15:42:56 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 16:13:59 pm] - [INFO] undefined - Token generated successfully
+[25.02.2024 17:04:01 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:04:01 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:04:10 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:04:11 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:04:39 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:04:40 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:04:46 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:04:46 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:05:08 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:05:09 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:05:14 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:05:15 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:05:21 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:05:21 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:10:17 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:10:17 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:11:10 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:11:11 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:12:17 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:12:18 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:13:44 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:13:45 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:24:04 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:24:05 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:25:25 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:25:26 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:38:53 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:38:54 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:39:20 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:39:21 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:39:34 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:39:35 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:39:42 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:39:43 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:41:09 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:41:10 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:42:12 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:42:13 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:42:18 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:42:19 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[25.02.2024 17:45:05 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[25.02.2024 17:45:06 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 10:50:45 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 10:50:51 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 10:53:45 am] - [INFO] undefined - Token generated successfully
+[26.02.2024 10:56:28 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 10:56:29 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 10:59:40 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 10:59:41 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 10:59:51 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 10:59:52 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:12:15 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:12:16 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:13:13 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:13:14 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:13:39 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:13:40 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:13:46 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:13:47 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:14:04 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:14:05 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:14:32 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:14:33 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:20:27 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:20:28 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:22:11 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:22:12 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 11:22:15 am] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 11:22:16 am] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 12:49:41 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[26.02.2024 12:49:41 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[26.02.2024 13:08:35 pm] - [INFO] undefined - Token generated successfully
+[26.02.2024 13:13:10 pm] - [INFO] undefined - Token generated successfully

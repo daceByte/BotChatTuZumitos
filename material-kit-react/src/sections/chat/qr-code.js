@@ -1,7 +1,16 @@
 import { Grid, Typography } from "@mui/material";
+import QRCode from "qrcode.react";
+import { useEffect, useState } from "react";
 
 export const ReadQrCode = (props) => {
-  const { company } = props;
+  const { qr } = props;
+
+  const [qrString, setQrString] = useState(null);
+
+  useEffect(() => {
+    console.log(qr);
+    setQrString(qr);
+  }, [qr]);
 
   return (
     <Grid style={{ marginTop: 60 }} container spacing={2}>
@@ -15,7 +24,15 @@ export const ReadQrCode = (props) => {
         </ul>
       </Grid>
       <Grid style={{ display: "flex", justifyContent: "center" }} item md={6}>
-        <img width={264} height={274} src="../qr.png" />
+        {qrString ? (
+          <QRCode size={264} value={qrString} />
+        ) : (
+          <img
+            width={264}
+            height={274}
+            src={"https://cdn.dribbble.com/users/1046956/screenshots/4468756/qrscananimation.gif"}
+          />
+        )}
       </Grid>
     </Grid>
   );

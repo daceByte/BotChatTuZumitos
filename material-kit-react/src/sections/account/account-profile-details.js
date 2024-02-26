@@ -1,4 +1,5 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
+import io from "socket.io-client";
 import {
   Box,
   Button,
@@ -36,6 +37,16 @@ const states = [
 ];
 
 export const AccountProfileDetails = () => {
+  const socketRef = useRef(null);
+
+  useEffect(() => {
+    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
+
   const [values, setValues] = useState({
     firstName: "Anika",
     lastName: "Visser",
@@ -56,6 +67,17 @@ export const AccountProfileDetails = () => {
     event.preventDefault();
   }, []);
 
+  const [logout, setLogout] = useState(-1);
+
+  const handleConnection = () => {
+    console.log("Logout " + logout);
+    if (logout != -1) {
+      socketRef.current.emit("logout", { session: logout });
+    } else {
+      toast.error("Selecciona una sucursal para cerrar sesion.");
+    }
+  };
+
   const fetchBranch = async () => {
     try {
       const response = await getAllBranchs();
@@ -72,6 +94,10 @@ export const AccountProfileDetails = () => {
   };
 
   const [branch, setBranch] = useState([]);
+
+  const handleLogoutChange = (event) => {
+    setLogout(event.target.value);
+  };
 
   useEffect(() => {
     console.log(branch);
@@ -91,21 +117,22 @@ export const AccountProfileDetails = () => {
                 <Select
                   labelId="select-label-2"
                   id="select"
-                  value={0}
+                  value={logout}
                   label="Seleccionar opción"
                   fullWidth
+                  onChange={handleLogoutChange}
                   margin="normal"
                 >
-                  <MenuItem value={0}>Seleciona una sucursal</MenuItem>
-                  {branch.map((bra) => (
-                    <MenuItem key={bra.bra_id} value={bra.bra_id}>
+                  <MenuItem value={-1}>Seleciona una sucursal</MenuItem>
+                  {branch.map((bra, index) => (
+                    <MenuItem key={bra.bra_id} value={index}>
                       {bra.bra_name}
                     </MenuItem>
                   ))}
                 </Select>
               </Grid>
               <Grid xs={12} md={6}>
-                <Button variant="text" color="error">
+                <Button onClick={handleConnection} variant="text" color="error">
                   Cerrar sesion
                 </Button>
               </Grid>

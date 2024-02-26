@@ -4,6 +4,7 @@ const RUser = require("./routes/RUser");
 const RLocation = require("./routes/RLocation");
 const RDelivery = require("./routes/RDelivery");
 const RBranch = require("./routes/RBranch");
+const RLead = require("./routes/RLead");
 const RResponse = require("./routes/RResponse");
 
 const router = Router();
@@ -13,6 +14,7 @@ router.use("/user", RUser);
 router.use("/location", RLocation);
 router.use("/delivery", RDelivery);
 router.use("/branch", RBranch);
+router.use("/lead", RLead);
 router.use("/response", RResponse);
 
 module.exports = router;

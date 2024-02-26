@@ -35,3 +35,9 @@
 [16.02.2024 16:53:08 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
 [16.02.2024 16:53:42 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
 [16.02.2024 16:53:43 pm] - [ERROR] [ROUTE] [/api/delivery] [CONTROLLER] [CDelivery] - MBranch is not defined
+[24.02.2024 14:36:15 pm] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:36 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:39 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:41 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:33:45 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')
+[25.02.2024 08:34:18 am] - [ERROR] [ROUTE] [/api/response] [CONTROLLER] [CResponse] - Cannot read properties of null (reading 'adm_id')

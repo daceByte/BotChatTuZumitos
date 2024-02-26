@@ -3,6 +3,7 @@ const {
   formatSms,
   formatInfo,
   formatSmsMedia,
+  formatSmsSingle,
   formatChats,
 } = require("./formatter");
 const core = require("./core/index");
@@ -41,7 +42,7 @@ bot.index = async (io) => {
 
       // Verifica que la sesion no halla una y que la sesion anterior este establecida primero.
       if (
-        (!session[index] && status[reIndex]) ||
+        (session[index] == undefined && status[reIndex]) ||
         (!session[index] && index == 0)
       ) {
         // Inicia la sesion.
@@ -92,11 +93,28 @@ bot.index = async (io) => {
 
     //Manejar eventos sobre el enviado de archivos
     socket.on("msg", async (data) => {
+      const index = data.session;
       console.log(`Cliente envio un mensaje a la sesion ${index}`);
       // Verifica que la sesion exista y que su estado se encuentre declarado.
       if (session[index] && status[index]) {
         //Envia al core(controlador) para que procese el mensaje entrante.
         await core.index(session[index], data);
+      }
+    });
+
+    //Manejar informacion y chat
+    socket.on("chat", async (data) => {
+      const index = data.session;
+      console.log(
+        `Cliente solicito informacion de un chat de la sesion ${index}`
+      );
+      // Verifica que la sesion exista y que su estado se encuentre declarado.
+      if (session[index] && status[index]) {
+        const chat = await session[index].getChatById(data.chatId);
+        let messages = await chat.fetchMessages({
+          limit: 20,
+        });
+        io.emit("chat", await formatSmsSingle(messages, chat, index));
       }
     });
   });
@@ -154,6 +172,7 @@ bot.bootstrap = async (client, index, io) => {
 
       //Indica que el cliente tiene una sesion real y activa para operar.
       ready[index] = true;
+      status[index] = true;
     } catch (error) {
       console.log("Error al obtener chats.", error);
     }

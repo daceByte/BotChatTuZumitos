@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3003/api/v1'
+export const BASE_URL = 'https://apituzumitos.codevalcanos.com/api/v1'
 
 export const headersConf = () => {
   let token

@@ -13,13 +13,31 @@ import { OverviewTraffic } from "src/sections/overview/overview-traffic";
 import { ReadQrCode } from "src/sections/chat/qr-code";
 import { ButtonSession } from "src/sections/chat/sesion-chat";
 import { ChatBox } from "src/sections/chat/chat-box";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import io from "socket.io-client";
 
 const now = new Date();
 
-const Page = () => {
-  const [session, setSession] = useState(0);
-  const [active, setActive] = useState(false);
+const Page = (props) => {
+  const { session, active, setActive, handleSession, chatActive } = props;
+  const [qr, setQr] = useState(null);
+  const socketRef = useRef(null);
+  useEffect(() => {
+    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+
+    socketRef.current.on("info", (data) => {
+      console.log(data);
+      console.log(data.idSession == session);
+      if (data.type == "qrcode" && data.idSession == session) {
+        console.log("Estableciendo QR");
+        setQr(data.content);
+      }
+    });
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, [qr, session]);
 
   return (
     <>
@@ -34,8 +52,17 @@ const Page = () => {
         }}
       >
         <Container maxWidth="xl">
-          <ButtonSession />
-          {session != 0 && active ? <ChatBox /> : <ReadQrCode />}
+          <ButtonSession setActive={setActive} setSession={handleSession} />
+          {session != -1 && active ? (
+            <ChatBox
+              setActive={setActive}
+              active={active}
+              session={session}
+              chatActive={chatActive}
+            />
+          ) : (
+            <ReadQrCode qr={qr} />
+          )}
         </Container>
       </Box>
     </>

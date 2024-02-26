@@ -43,11 +43,11 @@ const CLead = {
     }
   },
 
-  async update(id, data) {
+  async update(data) {
     try {
       await MLead.update(data, {
         where: {
-          lea_id: id,
+          lea_id: data.id,
         },
       });
       return { success: true };
@@ -60,11 +60,7 @@ const CLead = {
 
   async delete(id) {
     try {
-      await MLead.destroy({
-        where: {
-          lea_id: id,
-        },
-      });
+      
       return { success: true };
     } catch (error) {
       console.log(error);

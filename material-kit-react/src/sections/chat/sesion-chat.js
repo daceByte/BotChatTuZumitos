@@ -1,10 +1,22 @@
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { Card, Grid, Button, SvgIcon } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getAllBranchs } from "src/api/apiBranch";
+import io from "socket.io-client";
 
-export const ButtonSession = () => {
+export const ButtonSession = (props) => {
+  const { setSession, setActive } = props;
+  const socketRef = useRef(null);
+
+  useEffect(() => {
+    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
+
   const fetchBranch = async () => {
     try {
       const response = await getAllBranchs();
@@ -21,6 +33,14 @@ export const ButtonSession = () => {
   };
 
   const [branch, setBranch] = useState([]);
+
+  const handleConnection = (index) => {
+    console.log("Start " + index);
+    setSession(index);
+    localStorage.setItem('session', index);
+    setActive(false);
+    socketRef.current.emit("session", { session: index });
+  };
 
   useEffect(() => {
     if (branch.length == 0) {
@@ -41,11 +61,14 @@ export const ButtonSession = () => {
       spacing={2}
     >
       <Grid style={{ display: "contents", justifyContent: "center" }} item xs={6}>
-        {branch.map((bra) => (
+        {branch.map((bra, index) => (
           <Button
             key={bra.bra_id}
             style={{ marginRight: 10 }}
             variant="contained"
+            onClick={() => {
+              handleConnection(index);
+            }}
             className="bg-orange"
           >
             {bra.bra_name}

@@ -22,14 +22,19 @@ const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
 
 export const TopNav = (props) => {
-  const { onNavOpen } = props;
+  const { onNavOpen, setContact, contact } = props;
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
   const accountPopover = usePopover();
 
   const handleContact = async () => {
     if (window.location.pathname == "/") {
+      if (contact) {
+        setContact(false);
+      } else {
+        setContact(true);
+      }
     } else {
-      toast.warning("Necesitas conectarte primero a una sesión del chat.");
+      toast.warning("Necesitas estar en la ventana de chat.");
     }
   };
 
