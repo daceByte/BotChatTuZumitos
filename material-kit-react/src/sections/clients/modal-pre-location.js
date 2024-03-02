@@ -29,7 +29,7 @@ const LocationModalPre = ({ open, handleClose, cliId }) => {
     try {
       const response = await getClient(cliId);
       if (response.success) {
-        console.log(response.body.locations);
+        //console.log(response.body.locations);
         setSelectValues(response.body.locations);
       } else {
         toast.error("No se pudo cargar las ubicaciones asociadas con este cliente.");
@@ -84,11 +84,13 @@ const LocationModalPre = ({ open, handleClose, cliId }) => {
             fullWidth
           >
             <MenuItem value={0}>Agregar una ubicación</MenuItem>
-            {selectValues.map((option) => (
-              <MenuItem key={option.loc_id} value={option.loc_id}>
-                {option.loc_address}
-              </MenuItem>
-            ))}
+            {selectValues.length != 0
+              ? selectValues.map((option) => (
+                  <MenuItem key={option.loc_id} value={option.loc_id}>
+                    {option.loc_address}
+                  </MenuItem>
+                ))
+              : null}
           </Select>
         </DialogContent>
         <DialogActions>

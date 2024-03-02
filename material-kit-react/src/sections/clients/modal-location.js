@@ -26,7 +26,7 @@ const LocationModal = ({ open, handleClose, locationData, cliId, fetchClient }) 
   const fetchLocation = async () => {
     try {
       const response = await getLocation(locationData);
-      console.log(response);
+      //console.log(response);
       if (response.success) {
         setFormData(response.body);
       }

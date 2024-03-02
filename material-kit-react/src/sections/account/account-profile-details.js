@@ -40,7 +40,7 @@ export const AccountProfileDetails = () => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    socketRef.current = io("http://localhost:3003/");
 
     return () => {
       socketRef.current.disconnect();
@@ -84,7 +84,7 @@ export const AccountProfileDetails = () => {
       if (!response.success) {
         toast.error("Ocurrio un error interno.");
       } else {
-        console.log(response.body);
+        //console.log(response.body);
         setBranch(response.body);
       }
     } catch (error) {
@@ -100,7 +100,7 @@ export const AccountProfileDetails = () => {
   };
 
   useEffect(() => {
-    console.log(branch);
+    //console.log(branch);
     if (branch.length == 0) {
       fetchBranch();
     }

@@ -62,7 +62,7 @@ export const CompanyCard = (props) => {
           <Typography align="center" variant="body1">
             {"Sucursal: " + delivery.tbl_branch.bra_name}
             <br></br>
-            {"Estado: " + (delivery.del_status == 1 ? "🟢Activo" : "🔴Inactivo")}
+            {"Estado: " + (delivery.del_status == 1 ? "🔵Activo" : "🔴Inactivo")}
           </Typography>
         </CardContent>
         <Box sx={{ flexGrow: 1 }} />

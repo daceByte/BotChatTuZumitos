@@ -60,7 +60,7 @@ const ModalDealer = (props) => {
         props.onClose();
         toast.error("Ocurrio un error interno.");
       } else {
-        console.log(response.body);
+        //console.log(response.body);
         setBranch(response.body);
       }
     } catch (error) {
@@ -74,7 +74,7 @@ const ModalDealer = (props) => {
   const [branch, setBranch] = useState([]);
 
   useEffect(() => {
-    console.log(branch);
+    //console.log(branch);
     if (branch.length == 0) {
       fetchBranch();
     }

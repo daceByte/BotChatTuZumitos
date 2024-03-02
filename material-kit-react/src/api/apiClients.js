@@ -30,7 +30,7 @@ export const updateClient = async (data) => {
   return sleepAndApiRequest(() => axios.post(`${BASE_URL}/client/update`, data, headersConf()));
 };
 
-export const createClient = async (data) => {
+export const createClientApi = async (data) => {
   return sleepAndApiRequest(() => axios.post(`${BASE_URL}/client/create`, data, headersConf()));
 };
 

@@ -31,6 +31,7 @@ async function formatSms(message, index) {
   return {
     session: "session-client-" + index,
     idSession: index,
+    name: user.name,
     level: "data",
     ping: new Date().getTime() / 1000,
     type: "chat",
@@ -88,6 +89,9 @@ async function formatSms(message, index) {
 }*/
 
 async function formatSmsSingle(sms, user, index) {
+  const contact = await user.getContact();
+  const photo = await contact.getProfilePicUrl();
+
   const chat = sms.map((message) => {
     if (message.type == "poll_creation" || message.type == "sticker") {
       message["body"] =
@@ -122,6 +126,7 @@ async function formatSmsSingle(sms, user, index) {
     idSession: index,
     id: user.id,
     name: user.name,
+    picture: photo,
     level: "data",
     ping: new Date().getTime() / 1000,
     type: "chat-single",

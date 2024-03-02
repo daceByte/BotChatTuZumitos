@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   Box,
@@ -10,75 +10,47 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
+import { createClientApi } from "src/api/apiClients";
 import { toast } from "react-toastify";
-import { getAllBranchs } from "src/api/apiBranch";
-import { createDealer } from "src/api/apiDealers";
+import LocationModalPre from "./modal-pre-location";
 
-const ModalDealer = (props) => {
-  const [updatedClient, setUpdatedClient] = useState({
-    del_fullname: "",
-    del_phone: "",
-    del_status: 1,
-    fk_del_bra_id: 1,
+const CreateClientModal = (props) => {
+  const [createClient, setCreateClient] = useState({
+    cli_fullname: "",
+    cli_phone: props.chatActive,
+    cli_method: "",
+    cli_payment: "",
+    cli_note: "",
+    fk_cli_bra_id: props.session + 1,
   });
 
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedClient((prevClient) => ({ ...prevClient, [name]: value }));
+    setCreateClient((prevClient) => ({
+      ...prevClient,
+      [name]: value,
+    }));
   };
 
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      const response = await createDealer(updatedClient);
+      console.log(createClient);
+      const response = await createClientApi(createClient);
       if (response.success) {
-        toast.success("Repartidor se ha registrado con exito.");
-        await props.fetchDeliveries();
+        toast.success("Cliente se ha registrado.");
+        await props.fetchClients();
         props.onClose();
       } else {
-        toast.error("Repartidor no se ha registrado.");
+        toast.error("Cliente no se ha registrado.");
       }
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const fetchBranch = async () => {
-    setLoading(true);
-    try {
-      const response = await getAllBranchs();
-      if (!response.success) {
-        props.onClose();
-        toast.error("Ocurrio un error interno.");
-      } else {
-        //console.log(response.body);
-        setBranch(response.body);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Ocurrio un error interno.");
-      props.onClose();
-    }
-    setLoading(false);
-  };
-
-  const [branch, setBranch] = useState([]);
-
-  useEffect(() => {
-    //console.log(branch);
-    if (branch.length == 0) {
-      fetchBranch();
-    }
-  }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -92,54 +64,62 @@ const ModalDealer = (props) => {
         onClose={props.onClose}
       >
         <Box sx={{ width: 400, p: 3, bgcolor: "background.paper", borderRadius: 2 }}>
-          <Typography variant="h6">Registrar repartidor</Typography>
+          <Typography variant="h6">Registrar Cliente</Typography>
           <TextField
             label="Nombre Completo"
-            name="del_fullname"
-            value={updatedClient.del_fullname}
+            name="cli_fullname"
+            value={createClient.cli_fullname}
             onChange={handleInputChange}
             fullWidth
+            maxLength={30}
             margin="normal"
           />
           <TextField
             label="Teléfono"
-            name="del_phone"
-            value={updatedClient.del_phone}
+            name="cli_phone"
+            value={createClient.cli_phone}
+            disabled
+            fullWidth
+            margin="normal"
+          />
+          <InputLabel id="select-label">Método de envió favorito</InputLabel>
+          <Select
+            labelId="select-label"
+            id="select"
+            name="cli_method"
+            value={createClient.cli_method}
+            label="Seleccionar opción"
+            onChange={handleInputChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value={1}>Domicilio</MenuItem>
+            <MenuItem value={2}>Pickup</MenuItem>
+          </Select>
+          <InputLabel id="select-label-2">Método de pago favorito</InputLabel>
+          <Select
+            labelId="select-label-2"
+            id="select"
+            name="cli_payment"
+            value={createClient.cli_payment}
+            label="Seleccionar opción"
+            onChange={handleInputChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value={1}>Efectivo</MenuItem>
+            <MenuItem value={2}>Tarjeta</MenuItem>
+            <MenuItem value={3}>Transferencia</MenuItem>
+          </Select>
+          <TextField label="Sucursal" value={"Avion"} fullWidth disabled margin="normal" />
+          <TextField
+            label="Nota adicional"
+            name="cli_note"
+            value={createClient.cli_note}
             onChange={handleInputChange}
             fullWidth
             margin="normal"
           />
-          <InputLabel id="select-label">Estado del repartidor</InputLabel>
-          <Select
-            labelId="select-label"
-            id="select"
-            name="del_status"
-            value={updatedClient.del_status}
-            label="Seleccionar opción"
-            onChange={handleInputChange}
-            fullWidth
-            margin="normal"
-          >
-            <MenuItem value={1}>🟢Activo</MenuItem>
-            <MenuItem value={0}>🔴Inactivo</MenuItem>
-          </Select>
-          <InputLabel id="select-label-2">Sucursal del repartidor</InputLabel>
-          <Select
-            labelId="select-label-2"
-            id="select"
-            name="fk_del_bra_id"
-            value={updatedClient.fk_del_bra_id}
-            label="Seleccionar opción"
-            onChange={handleInputChange}
-            fullWidth
-            margin="normal"
-          >
-            {branch.map((bra) => (
-              <MenuItem key={bra.bra_id} value={bra.bra_id}>
-                {bra.bra_name}
-              </MenuItem>
-            ))}
-          </Select>
           <Button
             style={{ marginTop: 10 }}
             variant="contained"
@@ -156,7 +136,7 @@ const ModalDealer = (props) => {
             Registrar
           </Button>
           <Button
-            style={{ marginTop: 10 }}
+            style={{ marginLeft: 10, marginTop: 10 }}
             variant="contained"
             disabled={loading}
             color="error"
@@ -176,4 +156,4 @@ const ModalDealer = (props) => {
   );
 };
 
-export default ModalDealer;
+export default CreateClientModal;

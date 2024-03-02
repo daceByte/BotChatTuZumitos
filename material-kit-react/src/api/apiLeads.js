@@ -28,7 +28,7 @@ export const updateLead = async (data) => {
   return sleepAndApiRequest(() => axios.post(`${BASE_URL}/lead/update`, data, headersConf()));
 };
 
-export const createLead = async (data) => {
+export const createLeadApi = async (data) => {
   return sleepAndApiRequest(() => axios.post(`${BASE_URL}/lead/create`, data, headersConf()));
 };
 

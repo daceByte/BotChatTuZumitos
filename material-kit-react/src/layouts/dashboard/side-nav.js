@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ArrowTopRightOnSquareIcon from "@heroicons/react/24/solid/ArrowTopRightOnSquareIcon";
 import ChevronUpDownIcon from "@heroicons/react/24/solid/ChevronUpDownIcon";
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -53,10 +54,16 @@ export const SideNav = (props) => {
   }, [active]);
 
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    setChatActive("");
+  }, [session]);
+
+  useEffect(() => {
+    socketRef.current = io("http://localhost:3003/");
 
     socketRef.current.on("chats", (data) => {
-      if (!active && data.idSession == session) {
+      //console.log(data);
+      //console.log(data.idSession + " " + session);
+      if (active == false && data.idSession == session) {
         setActive(true);
       }
 
@@ -68,7 +75,7 @@ export const SideNav = (props) => {
     return () => {
       socketRef.current.disconnect();
     };
-  }, [session]);
+  }, [session, chats]);
 
   const ChatCard = ({ chat }) => {
     // Lógica para renderizar los datos de cada chat en una tarjeta
@@ -89,11 +96,13 @@ export const SideNav = (props) => {
         className="chat-card"
       >
         <div style={{ display: "flex" }}>
-          <img
-            height={40}
-            style={{ borderRadius: 20 }}
-            src={`assets/avatars/${Math.floor(Math.random() * 17) + 1}.png`}
-          />
+          <Badge badgeContent={chat.unreadCount} color="info">
+            <img
+              height={40}
+              style={{ borderRadius: 20 }}
+              src={`https://t4.ftcdn.net/jpg/03/42/99/71/360_F_342997143_wz7x1yR7KWhmhSKF9OHwuQ2W4W7IUDvH.jpg`}
+            />
+          </Badge>
           <p style={{ fontSize: 16, position: "relative", top: -20, left: 10 }}>{chat.name}</p>
         </div>
         <p
@@ -111,7 +120,9 @@ export const SideNav = (props) => {
             ? "Te envió un audio"
             : chat.lastMessage.type == "image"
             ? "Te envió una foto"
-            : chat.lastMessage.body.slice(0, 25) + (chat.lastMessage.body.length > 25 ? "..." : "")}
+            : chat.lastMessage.type == "chat"
+            ? chat.lastMessage.body.slice(0, 25) + (chat.lastMessage.body.length > 25 ? "..." : "")
+            : "Te envio un mensaje no compatible.".slice(0, 23) + "..."}
         </p>
       </div>
     );

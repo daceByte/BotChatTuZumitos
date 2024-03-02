@@ -22,12 +22,12 @@ const Page = (props) => {
   const { session, active, setActive, handleSession, chatActive } = props;
   const [qr, setQr] = useState(null);
   const socketRef = useRef(null);
+
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    socketRef.current = io("http://localhost:3003/");
 
     socketRef.current.on("info", (data) => {
-      console.log(data);
-      console.log(data.idSession == session);
+      //console.log(data);
       if (data.type == "qrcode" && data.idSession == session) {
         console.log("Estableciendo QR");
         setQr(data.content);
@@ -52,7 +52,7 @@ const Page = (props) => {
         }}
       >
         <Container maxWidth="xl">
-          <ButtonSession setActive={setActive} setSession={handleSession} />
+          <ButtonSession setActive={setActive} session={session} setSession={handleSession} />
           {session != -1 && active ? (
             <ChatBox
               setActive={setActive}

@@ -14,6 +14,7 @@ import {
   Button,
 } from "@mui/material";
 import ModalDealer from "./modal-dealer";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 export const CompanyCard = (props) => {
   const { delivery } = props;
@@ -57,12 +58,19 @@ export const CompanyCard = (props) => {
             />
           </Box>
           <Typography align="center" gutterBottom variant="h5">
-            {delivery.del_fullname}
+            {delivery.tbl_branch.bra_name.slice(0, 3)}L{delivery.lea_id.toString().padStart(6, "0")}
           </Typography>
           <Typography align="center" variant="body1">
-            {"Sucursal: " + delivery.tbl_branch.bra_name}
+            {"Nick: " + delivery.lea_nickname}
             <br></br>
-            {"Estado: " + (delivery.del_status == 1 ? "🟢Activo" : "🔴Inactivo")}
+            {"Tipo lead: " +
+              (delivery.lea_type == 1
+                ? "Spam"
+                : delivery.lea_type == 2
+                ? "Contenido"
+                : "Misceláneo")}
+            <br></br>
+            {"Numero:" + parsePhoneNumberFromString("+" + delivery.lea_phone).formatInternational()}
           </Typography>
         </CardContent>
         <Box sx={{ flexGrow: 1 }} />
@@ -75,11 +83,13 @@ export const CompanyCard = (props) => {
           sx={{ p: 2 }}
         >
           <Stack alignItems="center" direction="row" spacing={1}>
-            <Button onClick={handleOpenModal} variant="contained">Actualizar</Button>
+            <Button onClick={handleOpenModal} variant="contained">
+              Actualizar
+            </Button>
           </Stack>
           <Stack alignItems="center" direction="row" spacing={1}>
             <Typography color="text.secondary" display="inline" variant="body2">
-              {"# " + delivery.del_id} ID
+              {"# " + delivery.lea_id} ID
             </Typography>
           </Stack>
         </Stack>

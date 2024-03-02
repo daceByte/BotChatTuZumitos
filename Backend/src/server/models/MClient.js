@@ -36,4 +36,12 @@ const MClient = db.define(
 
 MClient.belongsTo(MBranch, { foreignKey: "fk_cli_bra_id" });
 
+db.sync()
+  .then(() => {
+    console.log("Base de datos y tablas creadas si no existen.");
+  })
+  .catch((error) => {
+    console.error("Error al sincronizar las tablas:", error);
+  });
+
 module.exports = MClient;

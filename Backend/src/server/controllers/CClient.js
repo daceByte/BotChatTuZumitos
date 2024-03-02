@@ -85,14 +85,14 @@ const CClient = {
     try {
       const client = await MClient.findOne({
         where: {
-          cli_id: id,
+          [Op.or]: [{ cli_phone: id }, { cli_id: id }],
         },
         include: [{ model: MBranch }],
       });
 
       const locations = await MLocation.findAll({
         where: {
-          fk_loc_cli_id: id,
+          fk_loc_cli_id: client.cli_id,
         },
       });
       return { success: true, body: { client, locations } };
@@ -104,6 +104,7 @@ const CClient = {
   },
 
   async create(data) {
+    console.log(data)
     try {
       const client = await MClient.create(data);
       const count = await MLocation.count({

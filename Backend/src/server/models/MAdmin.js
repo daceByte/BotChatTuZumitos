@@ -9,6 +9,9 @@ const MAdmin = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    adm_user: {
+      type: Sequelize.STRING,
+    },
     adm_pass: {
       type: Sequelize.STRING,
     },
@@ -23,5 +26,13 @@ const MAdmin = db.define(
     tableName: "tbl_admin",
   }
 );
+
+db.sync()
+  .then(() => {
+    console.log("Base de datos y tablas creadas si no existen.");
+  })
+  .catch((error) => {
+    console.error("Error al sincronizar las tablas:", error);
+  });
 
 module.exports = MAdmin;

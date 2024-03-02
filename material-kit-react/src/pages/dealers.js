@@ -45,7 +45,7 @@ const Page = () => {
   }, [currentPage, search]);
 
   const handleInputChange = (event) => {
-    console.log(event);
+    //console.log(event);
     setSearch(event.target.value);
   };
 

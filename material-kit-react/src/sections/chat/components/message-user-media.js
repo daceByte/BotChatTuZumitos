@@ -1,7 +1,7 @@
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { Card, Grid, Typography, SvgIcon } from "@mui/material";
 
-export const MessageUser = (props) => {
+export const MessageUserMedia = (props) => {
   const formatTimestamp = (timestamp) => {
     const fecha = new Date(timestamp * 1000);
 
@@ -40,9 +40,7 @@ export const MessageUser = (props) => {
           {props.nameUser} {formatTimestamp(props.sms.timestamp)}
         </Typography>
       </div>
-      <div>
-        <p>{props.sms.body}</p>
-      </div>
+      <div>El mensaje no es compatible con el chatBot TuZumitos.</div>
     </div>
   );
 };

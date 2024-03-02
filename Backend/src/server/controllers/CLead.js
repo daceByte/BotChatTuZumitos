@@ -1,6 +1,7 @@
 const MLead = require("../models/MLead.js");
 const logger = require("../../middleware/logger.js");
 const { apiLead } = require("../../utils/constans.js");
+const MBranch = require("../models/MBranch.js");
 const ctx = {
   ctx: apiLead + "[CONTROLLER] [CLead]",
 };
@@ -8,7 +9,9 @@ const ctx = {
 const CLead = {
   async all() {
     try {
-      const leads = await MLead.findAll();
+      const leads = await MLead.findAll({
+        include: [{ model: MBranch }],
+      });
       return { success: true, body: leads };
     } catch (error) {
       console.log(error);
@@ -21,8 +24,9 @@ const CLead = {
     try {
       const lead = await MLead.findOne({
         where: {
-          lea_id: id,
+          lea_phone: id,
         },
+        include: [{ model: MBranch }],
       });
       return { success: true, body: lead };
     } catch (error) {
@@ -60,7 +64,6 @@ const CLead = {
 
   async delete(id) {
     try {
-      
       return { success: true };
     } catch (error) {
       console.log(error);

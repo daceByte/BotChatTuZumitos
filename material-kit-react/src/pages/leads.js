@@ -45,7 +45,7 @@ const Page = () => {
   }, [currentPage, search]);
 
   const handleInputChange = (event) => {
-    console.log(event);
+    //console.log(event);
     setSearch(event.target.value);
   };
 
@@ -82,19 +82,6 @@ const Page = () => {
               <Stack spacing={1}>
                 <Typography variant="h4">Leads</Typography>
               </Stack>
-              <div>
-                <Button
-                  onClick={handleOpenModal}
-                  startIcon={
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  }
-                  variant="contained"
-                >
-                  Registrar
-                </Button>
-              </div>
             </Stack>
             <CompaniesSearch handleInputChange={handleInputChange} search={search} />
             <Grid container spacing={3}>

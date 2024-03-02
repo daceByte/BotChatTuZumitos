@@ -38,6 +38,16 @@ const CLocation = {
 
   async create(data) {
     try {
+      const defaultLocation = await MLocation.findOne({
+        where: {
+          fk_loc_cli_id: data.fk_loc_cli_id,
+        },
+      });
+
+      if (defaultLocation == null) {
+        data.loc_default = 1;
+      }
+
       if (data.loc_default == 1) {
         await MLocation.update(
           {

@@ -8,6 +8,8 @@ import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import { MessageUser } from "./components/message-user";
 import { MessageHost } from "./components/message-host";
 import { ChatData } from "./components/chat-data";
+import { MessageUserMedia } from "./components/message-user-media";
+import { MessageHostMedia } from "./components/message-host-media";
 
 export const ChatBox = (props) => {
   const { chatActive, active, setActive, session } = props;
@@ -17,22 +19,27 @@ export const ChatBox = (props) => {
   const containerRef = useRef(null);
 
   const scrollToBottom = () => {
-    const container = containerRef.current;
-    container.scrollTop = container.scrollHeight;
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   };
 
   const [messages, setMessages] = useState([]);
+  const [imgUser, setImgUser] = useState(null);
+  const [nameUser, setNameUser] = useState(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    socketRef.current = io("http://localhost:3003/");
 
     socketRef.current.on("chat", (data) => {
-      console.log(data);
-      console.log(chatActive + " " + data.content[0].id.remote.replace("@c.us", ""));
+      //console.log(data);
       if (
         data.idSession == session &&
         chatActive == data.content[0].id.remote.replace("@c.us", "")
       ) {
+        console.log(data.content);
+        setImgUser(data.picture);
+        setNameUser(data.name);
         setMessages(data.content);
       }
     });
@@ -43,15 +50,23 @@ export const ChatBox = (props) => {
   }, [messages, chatActive]);
 
   useEffect(() => {
-    console.log(chatActive);
+    //console.log(chatActive);
     if (chatActive != "") {
       socketRef.current.emit("chat", { chatId: chatActive + "@c.us", session: session });
     }
   }, [chatActive]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, []);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 0);
+  }, [messages]);
+
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
   useEffect(() => {
     if (visibleArea) {
@@ -63,25 +78,64 @@ export const ChatBox = (props) => {
     }
   }, [visibleArea]);
 
+  const handleEnterPress = (event) => {
+    if (event.key === "Enter" && inputValue != "") {
+      // Ejecutar tu función aquí
+      const msg = {
+        session: session,
+        type: "chat",
+        hasMedia: false,
+        body: inputValue,
+        from: chatActive + "@c.us",
+      };
+
+      const addMsg = {
+        id: {
+          fromMe: true,
+        },
+        viewed: false,
+        name: "",
+        body: inputValue,
+        type: "chat",
+        timestamp: 1709409350,
+        hasMedia: false,
+      };
+
+      const newMessages = messages;
+
+      newMessages.push(addMsg);
+
+      setMessages(newMessages);
+
+      socketRef.current.emit("msg", msg);
+      setInputValue("");
+      scrollToBottom();
+    }
+  };
+
   return (
-    <Grid style={{ display: "flex" }} spacing={2}>
+    <Grid style={{ display: "flex" }}>
       <Card style={{ marginTop: 10, maxWidth: "100%", width: "100%" }} sx={{ p: 2 }}>
-        <Grid style={{ marginBottom: 20 }} container spacing={2}>
-          <Grid style={{ display: "flex" }} item xs={6}>
+        <Grid style={{ marginBottom: 20, height: 30 }}>
+          <Grid style={{ display: "flex", paddingBottom: 10, position: "relative", left: 0 }}>
             {chatActive != "" ? (
               <img
                 width={40}
                 id="chatImgUser"
                 height={40}
                 style={{ borderRadius: 20, marginRight: 10 }}
-                src="https://cdn-icons-png.flaticon.com/512/5331/5331819.png"
+                src={
+                  imgUser != null
+                    ? imgUser
+                    : "https://is2-ssl.mzstatic.com/image/thumb/Purple114/v4/78/ca/3b/78ca3b54-3aac-a766-ce9c-26232ae1c66f/source/512x512bb.jpg"
+                }
               />
             ) : null}
             <p id="chatLabelUser" style={{ marginTop: 10 }}>
-              Selecciona un usuario para abrir chat
+              {nameUser != null ? nameUser : "Usuario"}
             </p>
           </Grid>
-          <Grid style={{ display: "flex", justifyContent: "end" }} item xs={6}>
+          <Grid style={{ display: "flex", justifyContent: "end", position: "relative", top: -55 }}>
             <p
               onClick={() => {
                 setVisibleArea(!visibleArea);
@@ -95,12 +149,11 @@ export const ChatBox = (props) => {
           </Grid>
         </Grid>
 
-        <Grid style={{ height: "70vh" }} container spacing={2}>
+        <Grid style={{ height: "70vh" }}>
           <Grid
             ref={containerRef}
-            container
+            id="chatsMessagesScroll"
             style={{ height: "90%", paddingTop: 40, overflowY: "auto" }}
-            spacing={2}
           >
             {/* Mensajes */}
             <div style={{ width: "100%", paddingLeft: 30 }}>
@@ -113,9 +166,23 @@ export const ChatBox = (props) => {
                         sms.id.fromMe ? (
                           <MessageHost sms={sms} key={index} />
                         ) : (
-                          <MessageUser sms={sms} key={index} />
+                          <MessageUser
+                            imgUser={imgUser}
+                            nameUser={nameUser}
+                            sms={sms}
+                            key={index}
+                          />
                         )
-                      ) : null
+                      ) : sms.id.fromMe ? (
+                        <MessageHostMedia sms={sms} key={index} />
+                      ) : (
+                        <MessageUserMedia
+                          imgUser={imgUser}
+                          nameUser={nameUser}
+                          sms={sms}
+                          key={index}
+                        />
+                      )
                     )}
                 </>
               ) : null}
@@ -125,8 +192,9 @@ export const ChatBox = (props) => {
           {chatActive != "" ? (
             <>
               <OutlinedInput
-                defaultValue=""
                 fullWidth
+                value={inputValue}
+                onChange={handleInputChange}
                 style={{ marginLeft: 20, marginBottom: 10 }}
                 placeholder="Escribe un mensaje"
                 endAdornment={
@@ -144,6 +212,7 @@ export const ChatBox = (props) => {
                     height: 50,
                   },
                 }}
+                onKeyDown={handleEnterPress}
               />
               <Button
                 style={{ height: 50, marginLeft: 10 }}
@@ -163,8 +232,17 @@ export const ChatBox = (props) => {
           ) : null}
         </Grid>
       </Card>
-      <Card className="areaRead" container spacing={2}>
-        <ChatData visibleArea={visibleArea} setVisibleArea={setVisibleArea} />
+      <Card className="areaRead">
+        {nameUser != null ? (
+          <ChatData
+            imgUser={imgUser}
+            nameUser={nameUser}
+            session={session}
+            chatActive={chatActive}
+            visibleArea={visibleArea}
+            setVisibleArea={setVisibleArea}
+          />
+        ) : null}
       </Card>
     </Grid>
   );

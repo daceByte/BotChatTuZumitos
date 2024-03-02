@@ -6,11 +6,11 @@ import { getAllBranchs } from "src/api/apiBranch";
 import io from "socket.io-client";
 
 export const ButtonSession = (props) => {
-  const { setSession, setActive } = props;
+  const { setSession, setActive, session } = props;
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    socketRef.current = io("http://localhost:3003/");
 
     return () => {
       socketRef.current.disconnect();
@@ -23,7 +23,7 @@ export const ButtonSession = (props) => {
       if (!response.success) {
         toast.error("Ocurrio un error interno.");
       } else {
-        console.log(response.body);
+        //console.log(response.body);
         setBranch(response.body);
       }
     } catch (error) {
@@ -37,7 +37,6 @@ export const ButtonSession = (props) => {
   const handleConnection = (index) => {
     console.log("Start " + index);
     setSession(index);
-    localStorage.setItem('session', index);
     setActive(false);
     socketRef.current.emit("session", { session: index });
   };
@@ -69,7 +68,7 @@ export const ButtonSession = (props) => {
             onClick={() => {
               handleConnection(index);
             }}
-            className="bg-orange"
+            className={session == index ? "bg-orange" : ""}
           >
             {bra.bra_name}
           </Button>

@@ -54,13 +54,19 @@ export const Layout = withAuthGuard((props) => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apituzumitos.codevalcanos.com/");
+    socketRef.current = io("http://localhost:3003/");
 
     socketRef.current.on("msg", (data) => {
       console.log(data);
       if (data != null) {
         if (data.idSession == session) {
-          toast.info(data.name + ":" + data.message.body.slice(0, 25));
+          toast.info(
+            data.name +
+              ":" +
+              (data.message.type == "chat"
+                ? data.message.body.slice(0, 25)
+                : "Te envio un recurso.")
+          );
         }
       }
     });
@@ -84,7 +90,7 @@ export const Layout = withAuthGuard((props) => {
     return () => {
       socketRef.current.disconnect();
     };
-  }, []);
+  }, [session]);
 
   return (
     <>
