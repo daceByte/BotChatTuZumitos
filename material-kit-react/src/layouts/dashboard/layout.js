@@ -72,8 +72,8 @@ export const Layout = withAuthGuard((props) => {
     });
 
     socketRef.current.on("info", (data) => {
-      //console.log(data);
-      if (data.type == "info" && data.idSession == session) {
+      console.log(data);
+      if (data.type == "info" || data.type == "session") {
         toast.info(data.content, {
           position: "bottom-right",
         });

@@ -1941,3 +1941,17 @@
 [02.03.2024 16:01:07 pm] - [INFO] [SERVER] - Server running on localhost port :3003
 [02.03.2024 16:01:31 pm] - [INFO] [SERVER] [DATABASE] - Database connected
 [02.03.2024 16:01:33 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[02.03.2024 16:03:51 pm] - [INFO] [SERVER] [DATABASE] - Database connected
+[02.03.2024 16:03:54 pm] - [INFO] [SERVER] - Server running on localhost port :3003
+[02.03.2024 16:16:54 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:16:54 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:17:02 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:18:32 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:18:32 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:19:07 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:19:07 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:19:22 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:19:22 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:19:46 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:20:01 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
+[02.03.2024 16:20:02 pm] - [ERROR] [ROUTE] [/api/client] [CONTROLLER] [CClient] - Cannot read properties of null (reading 'cli_id')
