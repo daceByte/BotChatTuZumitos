@@ -8,7 +8,7 @@ export const ReadQrCode = (props) => {
   const [qrString, setQrString] = useState(null);
 
   useEffect(() => {
-    //console.log(qr);
+    console.log(qr);
     setQrString(qr);
   }, [qr]);
 

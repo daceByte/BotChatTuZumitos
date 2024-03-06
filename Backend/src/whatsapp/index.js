@@ -153,6 +153,8 @@ bot.start = async (index, io) => {
     // Inicia el cliente de whatsapp-js
     session[index] = new Client({
       puppeteer: {
+        executablePath: "/usr/bin/google-chrome",
+        args: ["--no-sandbox"],
         headless: "new",
       },
       authStrategy: new LocalAuth({ clientId: "client-" + index }),

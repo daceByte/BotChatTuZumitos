@@ -58,10 +58,10 @@ export const SideNav = (props) => {
   }, [session]);
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:3003/");
+    socketRef.current = io("https://apizumitos.codevalcanos.com/");
 
     socketRef.current.on("chats", (data) => {
-      //console.log(data);
+      console.log(data);
       //console.log(data.idSession + " " + session);
       if (active == false && data.idSession == session) {
         setActive(true);
