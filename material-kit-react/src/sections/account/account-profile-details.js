@@ -40,7 +40,7 @@ export const AccountProfileDetails = () => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apizumitos.codevalcanos.com/");
+    socketRef.current = io("https://apizumitosv2.codevalcanos.com/");
 
     return () => {
       socketRef.current.disconnect();

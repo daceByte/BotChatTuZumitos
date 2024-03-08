@@ -58,7 +58,7 @@ export const SideNav = (props) => {
   }, [session]);
 
   useEffect(() => {
-    socketRef.current = io("https://apizumitos.codevalcanos.com/");
+    socketRef.current = io("https://apizumitosv2.codevalcanos.com/");
 
     socketRef.current.on("chats", (data) => {
       console.log(data);

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const logger = require("../../middleware/logger.js");
-const CClient = require("../controllers/CCLient.js");
+const CClient = require("../controllers/CClient.js");
 const { apiClient } = require("../../utils/constans.js");
 const router = Router();
 

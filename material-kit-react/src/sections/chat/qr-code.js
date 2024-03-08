@@ -3,14 +3,14 @@ import QRCode from "qrcode.react";
 import { useEffect, useState } from "react";
 
 export const ReadQrCode = (props) => {
-  const { qr } = props;
+  const { qr, session } = props;
 
   const [qrString, setQrString] = useState(null);
 
   useEffect(() => {
     console.log(qr);
     setQrString(qr);
-  }, [qr]);
+  }, [qr, session]);
 
   return (
     <Grid style={{ marginTop: 60 }} container spacing={2}>

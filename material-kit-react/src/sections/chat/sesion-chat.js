@@ -6,11 +6,11 @@ import { getAllBranchs } from "src/api/apiBranch";
 import io from "socket.io-client";
 
 export const ButtonSession = (props) => {
-  const { setSession, setActive, session } = props;
+  const { setSession, setActive, session, setQr } = props;
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apizumitos.codevalcanos.com/");
+    socketRef.current = io("https://apizumitosv2.codevalcanos.com/");
 
     return () => {
       socketRef.current.disconnect();
@@ -36,6 +36,7 @@ export const ButtonSession = (props) => {
 
   const handleConnection = (index) => {
     console.log("Start " + index);
+    setQr("");
     setSession(index);
     setActive(false);
     socketRef.current.emit("session", { session: index });

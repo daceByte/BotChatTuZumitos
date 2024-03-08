@@ -29,7 +29,7 @@ export const ChatBox = (props) => {
   const [nameUser, setNameUser] = useState(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apizumitos.codevalcanos.com/");
+    socketRef.current = io("https://apizumitosv2.codevalcanos.com/");
 
     socketRef.current.on("chat", (data) => {
       //console.log(data);

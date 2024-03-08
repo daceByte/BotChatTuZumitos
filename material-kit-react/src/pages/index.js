@@ -24,7 +24,7 @@ const Page = (props) => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("https://apizumitos.codevalcanos.com/");
+    socketRef.current = io("https://apizumitosv2.codevalcanos.com/");
 
     socketRef.current.on("info", (data) => {
       //console.log(data);
@@ -52,7 +52,12 @@ const Page = (props) => {
         }}
       >
         <Container maxWidth="xl">
-          <ButtonSession setActive={setActive} session={session} setSession={handleSession} />
+          <ButtonSession
+            setQr={setQr}
+            setActive={setActive}
+            session={session}
+            setSession={handleSession}
+          />
           {session != -1 && active ? (
             <ChatBox
               setActive={setActive}
@@ -61,7 +66,7 @@ const Page = (props) => {
               chatActive={chatActive}
             />
           ) : (
-            <ReadQrCode qr={qr} />
+            <ReadQrCode session={session} qr={qr} />
           )}
         </Container>
       </Box>
