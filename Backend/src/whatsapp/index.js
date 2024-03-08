@@ -153,11 +153,11 @@ bot.start = async (index, io) => {
     // Inicia el cliente de whatsapp-js
     session[index] = new Client({
       puppeteer: {
-        executablePath:
-          "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-        //executablePath: "/usr/bin/google-chrome",
+        //executablePath:
+          //"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+        executablePath: "/usr/bin/google-chrome",
         args: ["--no-sandbox"],
-        headless: false,
+        headless: 'new',
       },
       authStrategy: new LocalAuth({ clientId: "client-" + index }),
     });
